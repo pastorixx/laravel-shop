@@ -1,0 +1,46 @@
+{
+    "listeners": {
+        "*:80": {
+            "pass": "routes"
+        }
+    },
+
+    "routes": [
+        {
+            "match": {
+                "uri": "!/index.php"
+            },
+            "action": {
+                "share": "/var/www/html/public$uri",
+                "response_headers": {
+                    "Cache-Control": "max-age=60, s-maxage=120"
+                },
+                "fallback": {
+                    "pass": "applications/local"
+                }
+            }
+        },
+        {
+            "match": {
+                "host": "shop.local",
+                "uri": "!/index.php"
+            },
+            "action": {
+                "share": "/var/www/html/public$uri",
+                "fallback": {
+                    "pass": "applications/local"
+                }
+            }
+        }
+    ],
+
+    "applications": {
+        "local": {
+            "type": "php",
+            "root": "/var/www/html/public/",
+            "script": "index.php",
+            "user": "www-data",
+            "group": "www-data"
+        }
+    }
+}
