@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "31d92e6a-6b9e-40dd-8b28-39040bb14255",
+		"name": "Laravel Shop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1540439"
+	},
+	"item": [
+		{
+			"name": "Get csrf-cookie",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://shop.local/sanctum/csrf-cookie",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"sanctum",
+						"csrf-cookie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user@example.com\",\r\n    \"password\": 123123123\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://shop.local/api/login",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|9mFqeSvpO98MQiQDFhAKQL8JTsYNqlT8qMXj0JkWdef0ea7c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://shop.local/api/products",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|9mFqeSvpO98MQiQDFhAKQL8JTsYNqlT8qMXj0JkWdef0ea7c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_id\": 1,\r\n    \"purchase_type\": \"buyout\", // \"rent\", \"buyout\"\r\n    \"number_of_hours\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://shop.local/api/pay",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"api",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prolong product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|9mFqeSvpO98MQiQDFhAKQL8JTsYNqlT8qMXj0JkWdef0ea7c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchase_id\": 1,\r\n    \"number_of_hours\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://shop.local/api/prolong",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"api",
+						"prolong"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get purchases",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|9mFqeSvpO98MQiQDFhAKQL8JTsYNqlT8qMXj0JkWdef0ea7c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://shop.local/api/purchases",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"api",
+						"purchases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get purchase",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|9mFqeSvpO98MQiQDFhAKQL8JTsYNqlT8qMXj0JkWdef0ea7c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://shop.local/api/purchases/1",
+					"protocol": "http",
+					"host": [
+						"shop",
+						"local"
+					],
+					"path": [
+						"api",
+						"purchases",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
