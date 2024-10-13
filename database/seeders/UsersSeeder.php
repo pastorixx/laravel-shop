@@ -23,7 +23,8 @@ class UsersSeeder extends Seeder
             'id' => 1,
             'name' => 'Test User',
             'email' => 'user@example.com',
-            'password' => Hash::make('123123123')
+            'password' => Hash::make('123123123'),
+            'balance' => 150,
         ]);
     }
 }

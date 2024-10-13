@@ -18,6 +18,7 @@ class Purchase extends Model
         'user_id',
         'product_id',
         'token',
+        'price',
         'expires_at',
     ];
 

@@ -7,6 +7,7 @@ use App\Exceptions\DefaultException;
 use App\Models\Product;
 use App\Models\Purchase;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PaymentService
 {
@@ -25,18 +26,23 @@ class PaymentService
             throw new DefaultException('You don\'t have enough money to buy!');
         }
 
-        $user->update([
-            'balance' => $user->balance - $product->price
-        ]);
-
         $expiresAt = $data['purchase_type'] == PurchaseTypes::RENT->value
             ? Carbon::now()->addHours($data['number_of_hours'])
             : null;
 
+        DB::beginTransaction();
+
+        $user->update([
+            'balance' => $user->balance - $product->price
+        ]);
+
         $purchase = $user->purchases()->create([
             'product_id' => $product->id,
+            'price' => $product->price,
             'expires_at' => $expiresAt,
         ]);
+
+        DB::commit();
 
         return $purchase;
     }
@@ -51,6 +57,10 @@ class PaymentService
     {
         $user = auth()->user();
         $purchase = $user->purchases()->find($data['purchase_id']);
+
+        if (!$purchase->expires_at) {
+            throw new DefaultException('You have already purchased this product!');
+        }
 
         if ($purchase->is_expired) {
             throw new DefaultException('The rental period for this product has expired!');
@@ -69,6 +79,7 @@ class PaymentService
 
         $purchase->update([
             'expires_at' => $expiresAt,
+            'price' => $purchase->price + $purchase->product['price'],
         ]);
 
         return $purchase;
